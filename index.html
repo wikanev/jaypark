@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parking Records</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Optional CSS styles */
+    body {
+      padding-top: 20px;
+    }
+    .container {
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Parking Records</h2>
+  <form id="dateFilterForm">
+    <div class="form-row">
+      <div class="col-md-4">
+        <label for="startDate">Start Date:</label>
+        <input type="date" class="form-control" id="startDate">
+      </div>
+      <div class="col-md-4">
+        <label for="endDate">End Date:</label>
+        <input type="date" class="form-control" id="endDate">
+      </div>
+      <div class="col-md-2">
+        <label for="view">View:</label>
+        <input type="number" class="form-control" id="view" min="1" value="10">
+      </div>
+      <div class="col-md-2">
+        <button type="button" id="filterButton" class="btn btn-primary btn-block">Filter</button>
+      </div>
+    </div>
+  </form>
+  <br>
+ 
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  // JavaScript for handling form submission and dynamic table population
+  $(document).ready(function() {
+    // Handle filter button click
+    $('#filterButton').click(function(event) {
+      event.preventDefault(); // Prevent default form submission
+      
+      // Get start and end dates from form inputs
+      var startDate = $('#startDate').val();
+      var endDate = $('#endDate').val();
+      var view = $('#view').val();
+      
+      // Construct API URL
+      var apiUrl = 'http://10.7.5.81/parkirsrg/park_set_html.php?';
+      apiUrl += 'startdate=' + encodeURIComponent(startDate);
+      apiUrl += '&enddate=' + encodeURIComponent(endDate);
+      apiUrl += '&view=' + encodeURIComponent(view);
+      
+      // Open API request URL in a new tab
+      window.open(apiUrl, '_blank');
+    });
+  });
+</script>
+
+</body>
+</html>
